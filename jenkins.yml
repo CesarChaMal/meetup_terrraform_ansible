@@ -1,0 +1,51 @@
+- hosts: all
+  become: true
+
+  pre_tasks:
+    - name: Install python
+      apt: name=python update_cache=yes
+  #tasks:
+  #  - include_vars: variables.yml
+  roles:
+    - geerlingguy.java
+    - geerlingguy.jenkins
+  vars:
+    - jenkins_hostname: localhost
+    - jenkins_package_state: present
+    - jenkins_http_port: 8080
+    - jenkins_admin_username: admin
+    - jenkins_admin_password: admin
+    #- jenkins_java_options: "-Djenkins.install.runSetupWizard=false -Dhudson.model.User.allowNonExistentUserToLogin=true -Dhudson.security.csrf.DefaultCrumbIssuer.EXCLUDE_SESSION_ID=true"
+    - jenkins_plugins:
+        - git
+        - ec2
+        - s3
+        - amazon-ecs
+        - maven-plugin
+        - aws-bucket-credentials
+        - aws-credentials
+        - amazon-ecr
+        - docker-plugin
+        - cloudbees-folder
+        - jdk-tool
+        - script-security
+        - gradle
+        - docker-commons
+        - ansible
+        - msbuild
+        - mstest
+        - terraform
+        - docker-plugin
+        - docker-build-publish
+        - docker-slaves
+        - scalable-amazon-ecs
+        - aws-sqs
+        - slack
+        - workflow-aggregator
+    - jenkins_plugins_install_dependencies: true
+    - jenkins_plugins_state: present
+    - __java_packages: ['java-1.8.0-openjdk-1.8.0.161']
+    - jenkins_admin_username: admin
+    - jenkins_admin_password: admin
+    - jenkins_version: "2.191"
+    - jenkins_args: "--prefix={{ jenkins_url_prefix }} -Djenkins.install.runSetupWizard=false -Dhudson.model.User.allowNonExistentUserToLogin=true -Dhudson.security.csrf.DefaultCrumbIssuer.EXCLUDE_SESSION_ID=true"

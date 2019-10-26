@@ -1,0 +1,16 @@
+jenkins_hostname: localhost
+jenkins_package_state: present
+jenkins_http_port: 8080
+jenkins_admin_username: admin
+jenkins_admin_password: admin
+jenkins_java_options: "-Djenkins.install.runSetupWizard=false"
+jenkins_plugins:
+  - git
+  - ec2
+  - s3
+  - amazon-ecs
+  - maven-plugin
+jenkins_plugins_install_dependencies: true
+jenkins_plugins_state: present
+__java_packages: ['java-1.8.0-openjdk-1.8.0.161']
+jenkins_version: "2.191"
