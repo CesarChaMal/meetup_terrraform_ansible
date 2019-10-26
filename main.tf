@@ -6,8 +6,8 @@
 resource "aws_instance" "jenkins_master" {
   ami = "ami-092546daafcc8bc0d"
 
-  instance_type = "t2.small"
-  key_name      = "meetup"
+  instance_type = "${var.instance_size}"
+  key_name      = "${var.aws_key_name}"
 
   tags {
     Name    = "jenkins-master"
@@ -37,6 +37,6 @@ resource "aws_instance" "jenkins_master" {
   //}
 
   provisioner "local-exec" {
-        command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu --private-key ~/.ssh/meetup.pem -i '${aws_instance.jenkins_master.public_ip},' jenkins.yml"
+        command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu --private-key ${var.private_key} -i '${aws_instance.jenkins_master.public_ip}' ${var.playbooks_folder}${var.playbook}"
     }
 }

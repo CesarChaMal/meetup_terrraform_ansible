@@ -20,6 +20,27 @@ variable "profile" {
 
 variable "private_key" {
   description = "description"
-  default = "/home/eduardofesilva/.ssh/meetup.pem"
+  default = "~/.ssh/meetup.pem"
+}
+
+
+variable "instance_size" {
+  description = "description"
+  default = "t2.small"
+}
+
+variable "aws_key_name" {
+  description = "description"
+  default = "meetup"
+}
+
+variable "playbook" {
+  description = "description"
+  default = "jenkins.yml"
+}
+
+variable "playbooks_folder" {
+  description = "description"
+  default = "./ansible/"
 }
 
